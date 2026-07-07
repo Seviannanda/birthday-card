@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Ourell 😁</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap');
+
+/* ============================================
+   ISI DI SINI: semua teks/foto bisa kamu ganti
+   lewat objek CONFIG di bagian <script> paling bawah.
+   ============================================ */
+
+:root{
+  --cream:#FBF3EF;
+  --rose:#E8A9A0;
+  --mauve:#C97B82;
+  --sage:#9CAF88;
+  --lavender:#C3B4D9;
+  --gold:#D4A657;
+  --ink:#4A3B3F;
+  --display: 'Cormorant Garamond', serif;
+  --script: 'Caveat', cursive;
+  --body: 'Nunito', sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--body);
+  overflow-x:hidden;
+}
+body.locked{overflow:hidden; height:100vh;}
+
+h1,h2,h3{font-family:var(--display); font-weight:600; margin:0;}
+Untuk Kamu, Sahabatku
+/* ---------- Petals mengambang (background ambient) ---------- */
+#petal-field{
+  position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden;
+}
+.falling-petal{
+  position:absolute; top:-40px;
+  width:14px; height:20px;
+  background:var(--petal-c, var(--rose));
+  border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+  opacity:.75;
+  animation: fall linear forwards;
+}
+@keyframes fall{
+  0%{ transform: translate(0,0) rotate(0deg); }
+  100%{ transform: translate(var(--drift,40px), 105vh) rotate(360deg); }
+}
+
+/* ---------- Cover / sampul ---------- */
+#cover{
+  position:fixed; inset:0; z-index:50;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:linear-gradient(160deg, #F6E4E8 0%, var(--cream) 55%, #F3E9F5 100%);
+  text-align:center; padding:24px;
+  transition: opacity .8s ease, transform .8s ease;
+}
+#cover.opened{
+  opacity:0; transform:scale(1.06);
+  pointer-events:none;
+}
+.gift-icon{
+  font-size:clamp(48px,10vw,72px);
+  animation: sway 3.2s ease-in-out infinite;
+  margin-bottom:8px;
+}
+@keyframes sway{
+  0%,100%{transform:rotate(-6deg);}
+  50%{transform:rotate(6deg);}
+}
+#cover h1{ font-size:clamp(28px,6vw,44px); color:var(--mauve); font-style:italic;}
+#cover p.tap-hint{
+  font-family:var(--script); font-size:clamp(20px,4vw,26px); color:var(--ink);
+  margin-top:18px; animation:pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{opacity:.55;} 50%{opacity:1;} }
+
+/* ---------- Layout umum ---------- */
+main{ position:relative; z-index:1; }
+section{
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:80px 20px; text-align:center;
+}
+.reveal{ opacity:0; transform:translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.visible{ opacity:1; transform:translateY(0); }
+
+/* ---------- Hero ---------- */
+#hero h1{ font-size:clamp(32px,7vw,58px); color:var(--mauve); }
+#hero .name{ color:var(--gold); font-style:italic; }
+#hero p{ max-width:560px; font-size:clamp(16px,2.4vw,19px); line-height:1.8; margin-top:18px; }
+.scroll-cue{ margin-top:48px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; opacity:.55; }
+
+/* ---------- Kartu alasan (fanned) ---------- */
+#reasons h2{ font-size:clamp(26px,5vw,38px); color:var(--mauve); margin-bottom:48px;}
+.reason-fan{ display:flex; flex-wrap:wrap; gap:24px; justify-content:center; max-width:920px; }
+.reason-card{
+  background:#fff; border-radius:18px; padding:26px 22px; width:220px;
+  box-shadow:0 10px 24px rgba(201,123,130,.14);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.reason-card:nth-child(odd){ transform:rotate(-2.5deg); }
+.reason-card:nth-child(even){ transform:rotate(2.5deg); }
+.reason-card:hover{ transform:translateY(-6px) rotate(0deg); box-shadow:0 16px 30px rgba(201,123,130,.22); }
+.reason-card .icon{ font-size:30px; }
+.reason-card h3{ font-size:19px; color:var(--mauve); margin:10px 0 6px; }
+.reason-card p{ font-size:14px; line-height:1.6; margin:0; color:var(--ink); opacity:.85; }
+
+/* ---------- Taman bunga (signature interaction) ---------- */
+#garden h2{ font-size:clamp(26px,5vw,38px); color:var(--mauve); }
+#garden p.hint{ font-family:var(--script); font-size:20px; margin-top:6px; opacity:.75; }
+.garden-row{ display:flex; flex-wrap:wrap; gap:34px; justify-content:center; margin-top:52px; }
+.flower-wrap{ width:150px; }
+.flower{ position:relative; width:100px; height:100px; margin:0 auto; cursor:pointer; }
+.petal{
+  position:absolute; top:50%; left:50%; width:34px; height:52px;
+  background:var(--petal-color, var(--rose));
+  border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;
+  transform-origin:50% 100%;
+  transform:translate(-50%,-100%) rotate(var(--angle)) scale(.2);
+  opacity:.45;
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1), opacity .45s ease;
+  transition-delay: calc(var(--i) * .05s);
+}
+.flower.bloomed .petal{ transform:translate(-50%,-100%) rotate(var(--angle)) scale(1); opacity:1; }
+.flower-center{
+  position:absolute; top:50%; left:50%; width:20px; height:20px;
+  background:var(--gold); border-radius:50%; transform:translate(-50%,-50%);
+  box-shadow:0 0 14px rgba(212,166,87,.55); z-index:2;
+}
+.flower-note{
+  margin-top:14px; font-family:var(--script); font-size:18px; color:var(--mauve);
+  opacity:0; transform:translateY(-6px); transition:opacity .5s ease .2s, transform .5s ease .2s;
+  min-height:44px;
+}
+.flower-wrap.bloomed .flower-note{ opacity:1; transform:translateY(0); }
+
+/* ---------- Galeri foto ---------- */
+#gallery h2{ font-size:clamp(26px,5vw,38px); color:var(--mauve); margin-bottom:40px;}
+.gallery-strip{
+  display:flex; gap:22px; overflow-x:auto; padding:20px 10px 30px;
+  max-width:100%; scroll-snap-type:x mandatory;
+}
+.polaroid{
+  flex:0 0 auto; background:#fff; padding:12px 12px 34px; border-radius:6px;
+  box-shadow:0 12px 22px rgba(74,59,63,.15); scroll-snap-align:center;
+  width:200px;
+}
+.polaroid:nth-child(odd){ transform:rotate(-3deg); }
+.polaroid:nth-child(even){ transform:rotate(3deg); }
+.polaroid img{ width:100%; height:220px; object-fit:cover; border-radius:2px; display:block; }
+.polaroid figcaption{ font-family:var(--script); font-size:16px; text-align:center; margin-top:10px; color:var(--ink); }
+
+/* ---------- Penutup ---------- */
+#closing{ background:linear-gradient(180deg, var(--cream), #F6E4E8); }
+#closing p.message{ max-width:560px; font-size:clamp(17px,2.6vw,20px); line-height:1.9; }
+#closing .signature{ font-family:var(--script); font-size:clamp(26px,4vw,32px); color:var(--mauve); margin-top:26px; }
+.candles{ font-size:34px; margin-top:26px; letter-spacing:8px; }
+
+/* ---------- Tombol musik ---------- */
+#music-toggle{
+  position:fixed; bottom:22px; right:22px; z-index:60;
+  width:52px; height:52px; border-radius:50%; border:none;
+  background:var(--mauve); color:#fff; font-size:20px; cursor:pointer;
+  box-shadow:0 8px 18px rgba(201,123,130,.35);
+  display:flex; align-items:center; justify-content:center;
+}
+#music-toggle[disabled]{ opacity:.4; cursor:not-allowed; }
+
+/* ---------- Cover dramatis: spotlight + sparkle + confetti ---------- */
+#cover{ overflow:hidden; }
+.cover-spotlight{
+  position:absolute; width:480px; height:480px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,169,160,.45) 0%, rgba(212,166,87,.18) 45%, transparent 75%);
+  filter:blur(10px);
+  animation: spotlight-pulse 4s ease-in-out infinite;
+  z-index:0;
+}
+@keyframes spotlight-pulse{
+  0%,100%{ transform:scale(1); opacity:.7; }
+  50%{ transform:scale(1.15); opacity:1; }
+}
+#sparkle-field{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+.sparkle{
+  position:absolute; width:4px; height:4px; border-radius:50%;
+  background:var(--gold); opacity:0;
+  animation: sparkle-twinkle 2.6s ease-in-out infinite;
+}
+@keyframes sparkle-twinkle{
+  0%,100%{ opacity:0; transform:scale(.4); }
+  50%{ opacity:1; transform:scale(1); }
+}
+.gift-icon, #cover h1, #cover p.tap-hint{ position:relative; z-index:2; }
+
+.gift-icon.popping{ animation: gift-pop .5s cubic-bezier(.34,1.56,.64,1) forwards; }
+@keyframes gift-pop{
+  0%{ transform:scale(1) rotate(0); }
+  40%{ transform:scale(1.35) rotate(-8deg); }
+  100%{ transform:scale(0) rotate(12deg); opacity:0; }
+}
+
+.confetti-bit{
+  position:fixed; z-index:55; border-radius:2px; pointer-events:none;
+  animation: confetti-fly .9s ease-out forwards;
+}
+@keyframes confetti-fly{
+  0%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
+  100%{ transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(.4); opacity:0; }
+}
+
+#cover p.tap-hint{
+  background: linear-gradient(90deg, var(--ink) 0%, var(--gold) 50%, var(--ink) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation: shimmer-text 3s linear infinite, pulse 1.8s ease-in-out infinite;
+}
+@keyframes shimmer-text{
+  0%{ background-position:200% center; }
+  100%{ background-position:-200% center; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .falling-petal, .gift-icon, .tap-hint{ animation:none !important; }
+  .reveal, .petal, .flower-note, #cover{ transition:none !important; }
+}
+</style>
+</head>
+<body class="locked">
+
+<div id="petal-field"></div>
+
+<div id="cover">
+  <div class="cover-spotlight"></div>
+  <div id="sparkle-field"></div>
+  <div class="gift-icon" id="gift-icon">🎁</div>
+  <h1>🎉 Selamat Ulang Tahun, Ourell!</h1>
+  <p class="tap-hint">Ketuk untuk membuka 💌</p>
+</div>
+
+<main>
+  <section id="hero">
+    <h1 class="reveal">Selamat Ulang Tahun,<br><span class="name" id="hero-name">Ourell</span></h1>
+    <p class="reveal" id="hero-message"></p>
+    <div class="scroll-cue reveal">gulir ke bawah ↓</div>
+  </section>
+
+  <section id="reasons">
+    <h2 class="reveal">🎉 Beberapa Hal yang Bikin Kamu Asik</h2>
+    <div class="reason-fan" id="reason-fan"></div>
+  </section>
+
+  <section id="garden">
+    <h2 class="reveal">Taman Kecil Untukmu</h2>
+    <p class="hint reveal">sentuh tiap bunga untuk mekar ✨</p>
+    <div class="garden-row" id="garden-row"></div>
+  </section>
+
+  <section id="gallery">
+    <h2 class="reveal">Moment favoritku</h2>
+    <div class="gallery-strip" id="gallery-strip"></div>
+  </section>
+
+  <section id="closing">
+    <p class="message reveal" id="closing-message"></p>
+    <div class="candles reveal">🕯️🕯️🕯️</div>
+    <p class="signature reveal" id="closing-signature"></p>
+  </section>
+</main>
+
+<button id="music-toggle" title="Musik latar">🔇</button>
+<audio id="bg-audio" loop></audio>
+
+<script>
+/* ================================================================
+   CONFIG — GANTI SEMUA TEKS & FOTO DI SINI SAJA.
+   Kamu tidak perlu menyentuh bagian bawahnya kalau cuma mau
+   mengubah isi kartu.
+   ================================================================ */
+const CONFIG = {
+  recipientName: "Ourell",
+  heroMessage: "Selamat ulang tahun, Ourell! 🥳 Semoga di umur yang baru ini makin sehat, makin bahagia, makin sukses, dan semua hal yang kamu usahakan bisa berjalan lancar. Jangan lupa tetap jadi diri sendiri dan Syukuri nikmat tiap harinnya!",
+
+  reasons: [
+    { icon:"😄", title:"Selalu Ceria", text:"Ketawamu sering bikin suasana jadi lebih seru." },
+    { icon:"😂", title:"Humornya", text:"Kadang receh, tapi tetap bikin ketawa." },
+    { icon:"🤝", title:"Teman yang Asik", text:"Enak diajak ngobrol dan seru buat bercanda. HeHeHeHe" },
+    { icon:"🎯", title:"Semangatmu", text:"Semoga semangatmu terus nular ke orang-orang sekitar." },
+    { icon:"✨", title:"Caramu Tetap Jadi Diri Sendiri", text:"Itu salah satu hal yang bikin kamu unik." }
+  ],
+
+  // Setiap bunga: warna kelopak + pesan singkat yang muncul saat mekar
+  flowers: [
+    { color:"#E8A9A0", note:"Semoga sehat selalu 🌸" },
+    { color:"#C3B4D9", note:"Semoga makin bahagia." },
+    { color:"#D4A657", note:"Semoga semua impianmu tercapai." },
+    { color:"#9CAF88", note:"Jangan lupa sering senyum 😄" },
+    { color:"#C97B82", note:"Selamat ulang tahun 🎂" }
+  ],
+
+
+  photos: [
+    { url:"assets/images/img1.png", caption:"Momen santai" },
+    { url:"assets/images/img2.png", caption:"Foto random 😆" },
+    { url:"assets/images/img3.png", caption:"Hari yang seru" },
+    { url:"assets/images/img4.png", caption:"Mengkeren 😎" }
+  ],
+
+  closingMessage: "Semoga tahun barumu dipenuhi hal-hal baik yang bahkan belum pernah kamu bayangkan. Terima kasih sudah jadi teman yang luar biasa selama ini.",
+  senderName: "Dari Edzy 😎",
+
+  // Taruh file musik (mp3) di folder "assets/" lalu isi nama filenya di
+  // bawah ini, contoh: "assets/musik-latar.mp3". Kosongkan ("") kalau
+  // tidak mau pakai musik.
+  musicSrc: "assets/audio/song1.mp3"
+};
+
+/* ================================================================
+   Bagian bawah ini adalah logika halaman — aman untuk dibiarkan.
+   ================================================================ */
+
+// --- isi teks dari CONFIG ---
+document.getElementById('hero-name').textContent = CONFIG.recipientName;
+document.getElementById('hero-message').textContent = CONFIG.heroMessage;
+document.getElementById('closing-message').textContent = CONFIG.closingMessage;
+document.getElementById('closing-signature').textContent = CONFIG.senderName;
+
+// --- kartu alasan ---
+const reasonFan = document.getElementById('reason-fan');
+CONFIG.reasons.forEach(r=>{
+  const card = document.createElement('div');
+  card.className = 'reason-card';
+  card.innerHTML = `<div class="icon">${r.icon}</div><h3>${r.title}</h3><p>${r.text}</p>`;
+  reasonFan.appendChild(card);
+});
+
+// --- taman bunga (signature interaction) ---
+const gardenRow = document.getElementById('garden-row');
+CONFIG.flowers.forEach(f=>{
+  const wrap = document.createElement('div');
+  wrap.className = 'flower-wrap';
+
+  const flower = document.createElement('div');
+  flower.className = 'flower';
+  flower.style.setProperty('--petal-color', f.color);
+
+  for(let i=0;i<6;i++){
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.style.setProperty('--angle', (i*60)+'deg');
+    petal.style.setProperty('--i', i);
+    flower.appendChild(petal);
+  }
+  const center = document.createElement('div');
+  center.className = 'flower-center';
+  flower.appendChild(center);
+
+  const note = document.createElement('div');
+  note.className = 'flower-note';
+  note.textContent = f.note;
+
+  flower.addEventListener('click', ()=>{
+    flower.classList.toggle('bloomed');
+    wrap.classList.toggle('bloomed');
+  });
+
+  wrap.appendChild(flower);
+  wrap.appendChild(note);
+  gardenRow.appendChild(wrap);
+});
+
+// --- galeri foto ---
+const galleryStrip = document.getElementById('gallery-strip');
+CONFIG.photos.forEach(p=>{
+  const fig = document.createElement('figure');
+  fig.className = 'polaroid';
+  fig.innerHTML = `<img src="${p.url}" alt="${p.caption}" loading="lazy"><figcaption>${p.caption}</figcaption>`;
+  galleryStrip.appendChild(fig);
+});
+
+// --- scroll reveal ---
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{ threshold:0.2 });
+revealEls.forEach(el=>io.observe(el));
+
+// --- petal mengambang ---
+const petalField = document.getElementById('petal-field');
+const petalColors = ['#E8A9A0','#C3B4D9','#D4A657','#9CAF88'];
+let petalInterval = null;
+function spawnPetal(){
+  const p = document.createElement('div');
+  p.className = 'falling-petal';
+  const startX = Math.random()*100;
+  const drift = (Math.random()*80-40)+'px';
+  const duration = 6+Math.random()*5;
+  p.style.left = startX+'vw';
+  p.style.setProperty('--drift', drift);
+  p.style.setProperty('--petal-c', petalColors[Math.floor(Math.random()*petalColors.length)]);
+  p.style.animationDuration = duration+'s';
+  petalField.appendChild(p);
+  setTimeout(()=>p.remove(), duration*1000+200);
+}
+
+// --- musik latar ---
+const audio = document.getElementById('bg-audio');
+const musicBtn = document.getElementById('music-toggle');
+if(CONFIG.musicSrc){
+  audio.src = CONFIG.musicSrc;
+} else {
+  musicBtn.disabled = true;
+  musicBtn.title = "Tambahkan musik lewat CONFIG.musicSrc";
+}
+let musicPlaying = false;
+musicBtn.addEventListener('click', ()=>{
+  if(!CONFIG.musicSrc) return;
+  if(musicPlaying){ audio.pause(); musicBtn.textContent='🔇'; }
+  else{ audio.play(); musicBtn.textContent='🔊'; }
+  musicPlaying = !musicPlaying;
+});
+
+// --- sparkle di sampul ---
+const sparkleField = document.getElementById('sparkle-field');
+for(let i=0;i<24;i++){
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  s.style.left = Math.random()*100+'%';
+  s.style.top = Math.random()*100+'%';
+  s.style.animationDelay = (Math.random()*2.6)+'s';
+  sparkleField.appendChild(s);
+}
+
+// --- confetti burst saat sampul dibuka ---
+function burstConfetti(originEl){
+  const rect = originEl.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+  const colors = ['#E8A9A0','#C3B4D9','#D4A657','#9CAF88','#C97B82'];
+  for(let i=0;i<28;i++){
+    const bit = document.createElement('div');
+    bit.className = 'confetti-bit';
+    const angle = Math.random()*Math.PI*2;
+    const distance = 80+Math.random()*140;
+    bit.style.left = cx+'px';
+    bit.style.top = cy+'px';
+    bit.style.width = (5+Math.random()*5)+'px';
+    bit.style.height = (5+Math.random()*5)+'px';
+    bit.style.background = colors[Math.floor(Math.random()*colors.length)];
+    bit.style.setProperty('--tx', Math.cos(angle)*distance+'px');
+    bit.style.setProperty('--ty', Math.sin(angle)*distance+'px');
+    bit.style.setProperty('--rot', (Math.random()*360)+'deg');
+    document.body.appendChild(bit);
+    setTimeout(()=>bit.remove(), 950);
+  }
+}
+const giftIcon = document.getElementById('gift-icon');
+
+// --- buka sampul ---
+const cover = document.getElementById('cover');
+cover.addEventListener('click', ()=>{
+  giftIcon.classList.add('popping');
+  burstConfetti(giftIcon);
+  cover.classList.add('opened');
+  document.body.classList.remove('locked');
+  spawnPetal();
+  petalInterval = setInterval(spawnPetal, 900);
+  if(CONFIG.musicSrc){ audio.play().catch(()=>{}); musicBtn.textContent='🔊'; musicPlaying=true; }
+  setTimeout(()=>{ cover.style.display='none'; }, 850);
+});
+</script>
+</body>
+</html>
